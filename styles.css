@@ -255,6 +255,14 @@ nav {
     transform: scale(1.2);
 }
 
+/* Responsive Layout */
+@media (max-width: 768px) {
+    .skills-container {
+        grid-template-columns: repeat(2, 1fr); /* 2x2 layout */
+        gap: 15px;
+    }
+}
+
 /* Projects Section */
 .projects {
     text-align: center;
