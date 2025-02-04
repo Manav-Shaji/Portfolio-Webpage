@@ -110,8 +110,8 @@ nav {
 
 @media (min-width: 768px) {
     #mobile-menu {
-        display: flex !important; /* Ensures it shows on desktop */
-        position: static !important;
+        display: none !important; /* Ensures it shows on desktop */
+        
     }
 
     #menu-btn {
