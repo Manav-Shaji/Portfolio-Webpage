@@ -97,7 +97,9 @@ nav {
         display: block;
         padding: 12px;
     }
+}
 
+@media (min-width: 769px) {
     .navbar-collapse {
         display: flex !important;
     }
@@ -105,7 +107,6 @@ nav {
         display: none !important;
     }
 }
-
 
 /* Home Section */
 #home {
