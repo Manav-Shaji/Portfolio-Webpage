@@ -7,10 +7,14 @@
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
     line-height: 1.6;
     background-color: #121212;
     color: #E1E1E1;
+}
+
+h1, h2, h3 {
+    letter-spacing: 0.8px;
 }
 
 /* Navbar Styles */
@@ -21,8 +25,16 @@ nav {
     width: 100%;
     top: 0;
     z-index: 1000;
+    background: #121212; /* Dark background */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background: rgba(18, 18, 18, 0.6); /* Semi-transparent */
+    backdrop-filter: blur(15px); /* Smooth blur effect */
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
 }
 
+/* Navbar Brand Styling */
 .navbar-brand {
     font-weight: 600;
     font-size: 1.5rem;
@@ -30,22 +42,63 @@ nav {
     transition: transform 0.3s ease-in-out, color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
 }
 
-/* Hover Effect */
+/* Navbar Brand Hover Effect */
 .navbar-brand:hover {
-    transform: scale(1.1);
-    color: #4C9FFF;  /* Change to blue shade */
-    text-shadow: 0px 4px 10px rgba(76, 159, 255, 0.5); /* Subtle glow effect */
+    transform: scale(1.1) translateY(-2px);
+    color: #4C9FFF;
+    text-shadow: 0px 4px 10px rgba(76, 159, 255, 0.5);
 }
 
+/* Navbar Links Styling */
 .navbar-nav .nav-link {
     color: #E1E1E1;
     font-weight: 500;
-    transition: color 0.3s ease-in-out;
+    position: relative;
+    padding: 10px 15px;
+    transition: color 0.3s ease;
 }
 
+/* Underline Hover Animation */
+.navbar-nav .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, #4C9FFF, #3A8CE8);
+    transition: all 0.3s ease-in-out;
+    transform: translateX(-50%);
+}
+
+.navbar-nav .nav-link:hover::after {
+    width: 100%;
+}
+
+/* Navbar Link Hover */
 .navbar-nav .nav-link:hover {
     color: #4C9FFF;
 }
+
+/* Remove Blue Outline on Click */
+.navbar-nav .nav-link:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 159, 255, 0.5);
+    border-radius: 5px;
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+    .navbar-nav {
+        text-align: center;
+    }
+
+    .navbar-nav .nav-link {
+        display: block;
+        padding: 12px;
+    }
+}
+
 
 /* Home Section */
 #home {
@@ -126,7 +179,7 @@ nav {
         padding: 40px 8%;
     }
 
-   .about-content p {
+    .about-content p {
         max-width: 100%;
         text-align: justify;
     }
@@ -186,13 +239,20 @@ nav {
     padding: 12px 24px;
     font-size: 18px;
     border-radius: 50px;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease;
     text-align: center;
     min-width: 150px;
     margin-top: 1rem;
+    background: linear-gradient(90deg, #007bff, #4C9FFF);
+    color: white;
+    font-weight: 600;
 }
 
-/* delete*/
+.btn:hover {
+    box-shadow: 0px 0px 15px rgba(76, 159, 255, 0.5);
+    transform: translateY(-3px);
+}
+
 .about-buttons a {
     display: inline-block;
     padding: 12px 20px;
@@ -255,13 +315,6 @@ nav {
     transform: scale(1.2);
 }
 
-/* Responsive Layout */
-@media (max-width: 768px) {
-    .skills-container {
-        grid-template-columns: repeat(2, 1fr); /* 2x2 layout */
-        gap: 15px;
-    }
-}
 
 /* Projects Section */
 .projects {
@@ -270,12 +323,12 @@ nav {
     background: #111;
 }
 
-/* Project Container */
+
+
 .project-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(300px, 1fr)); /* Responsive */
     gap: 20px;
-    padding-bottom: 20px;
 }
 
 /* Responsive Adjustments */
@@ -301,7 +354,7 @@ nav {
     padding: 20px;
     text-align: justify;
     margin: 10px 5px;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     display: flex;
@@ -315,11 +368,9 @@ nav {
 }
 
 .project-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-5px);
     background: rgba(255, 255, 255, 0.2); /* Slightly stronger on hover */
-    box-shadow:
-        inset 0 0 15px rgba(255, 255, 255, 0.12),
-        0 6px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
 }
 
 /* Project Links */
