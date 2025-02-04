@@ -88,34 +88,30 @@ nav {
 }
 
 /* Mobile Navigation */
-@media (max-width: 768px) {
-    .navbar-nav {
-        text-align: center;
-    }
-
-    .navbar-nav .nav-link {
-        display: block;
-        padding: 12px;
-    }
-}
-
 @media (min-width: 769px) {
     .navbar-collapse {
         display: flex !important;
     }
+    
+    .navbar-nav {
+        display: flex;
+        flex-direction: row; /* Makes the menu horizontal */
+        justify-content: center; /* Centers items */
+        align-items: center;
+        gap: 20px; /* Adds spacing between menu items */
+    }
+
+    .navbar-nav .nav-link {
+        display: inline-block;
+        padding: 10px 15px;
+    }
+
     .navbar-toggler {
         display: none !important;
     }
-}
 
-@media (min-width: 768px) {
-    #mobile-menu {
-        display: none !important; /* Ensures it shows on desktop */
-        
-    }
-
-    #menu-btn {
-        display: none !important; /* Hide the hamburger icon */
+    #mobile-menu, #menu-btn {
+        display: none !important; /* Hides mobile menu elements */
     }
 }
 
