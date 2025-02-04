@@ -97,6 +97,13 @@ nav {
         display: block;
         padding: 12px;
     }
+
+    .navbar-collapse {
+        display: flex !important;
+    }
+    .navbar-toggler {
+        display: none !important;
+    }
 }
 
 
@@ -323,11 +330,9 @@ nav {
     background: #111;
 }
 
-
-
 .project-container {
     display: grid;
-    grid-template-columns: repeat(2, minmax(300px, 1fr)); /* Responsive */
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
     gap: 20px;
 }
 
