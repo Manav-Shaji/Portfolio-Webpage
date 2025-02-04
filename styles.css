@@ -108,6 +108,17 @@ nav {
     }
 }
 
+@media (min-width: 768px) {
+    #mobile-menu {
+        display: flex !important; /* Ensures it shows on desktop */
+        position: static !important;
+    }
+
+    #menu-btn {
+        display: none !important; /* Hide the hamburger icon */
+    }
+}
+
 /* Home Section */
 #home {
     min-height: 100vh;
