@@ -1,23 +1,35 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // 🏠 Hamburger Menu Toggle
-    const menuBtn = document.getElementById("menu-btn");
-    const mobileMenu = document.getElementById("mobile-menu");
+ // 🏠 Hamburger Menu Toggle
+const menuBtn = document.getElementById("menu-btn");
+const mobileMenu = document.getElementById("mobile-menu");
 
-    if (menuBtn && mobileMenu) {
-        menuBtn.addEventListener("click", function () {
-            mobileMenu.classList.toggle("active");
-            // Ensure focus management for accessibility
-            if (mobileMenu.classList.contains("active")) {
-                mobileMenu.setAttribute("aria-expanded", "true");
-                mobileMenu.setAttribute("aria-hidden", "false");
-                menuBtn.setAttribute("aria-label", "Close menu");
-            } else {
-                mobileMenu.setAttribute("aria-expanded", "false");
-                mobileMenu.setAttribute("aria-hidden", "true");
-                menuBtn.setAttribute("aria-label", "Open menu");
-            }
-        });
-    }
+if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener("click", function () {
+        mobileMenu.classList.toggle("active");
+
+        // Ensure accessibility attributes are updated
+        if (mobileMenu.classList.contains("active")) {
+            mobileMenu.setAttribute("aria-expanded", "true");
+            mobileMenu.setAttribute("aria-hidden", "false");
+            menuBtn.setAttribute("aria-label", "Close menu");
+        } else {
+            mobileMenu.setAttribute("aria-expanded", "false");
+            mobileMenu.setAttribute("aria-hidden", "true");
+            menuBtn.setAttribute("aria-label", "Open menu");
+        }
+    });
+
+    // 🖥️ Fix: Reset menu on window resize
+    window.addEventListener("resize", function () {
+        if (window.innerWidth > 768) {
+            mobileMenu.classList.remove("active");
+            mobileMenu.setAttribute("aria-expanded", "false");
+            mobileMenu.setAttribute("aria-hidden", "true");
+            menuBtn.setAttribute("aria-label", "Open menu");
+        }
+    });
+}
+
 
     // Initialize AOS (Animate on Scroll) Library
     AOS.init({
