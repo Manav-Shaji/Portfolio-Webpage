@@ -83,27 +83,45 @@ nav {
 .about {
     display: flex;
     align-items: center;
-    justify-content: justify;
+    justify-content: space-between; /* Proper alignment */
     padding: 50px;
     max-width: 1200px;
     margin: auto;
     gap: 50px;
 }
 
+/* About Content */
 .about-content {
     flex: 1;
     max-width: 600px;
 }
 
+/* About Heading */
 .about-content h1 {
     font-size: 50px;
     line-height: 1.2;
 }
 
+/* About Text */
 .about-content p {
     font-size: 18px;
     margin-top: 15px;
     max-width: 500px;
+    line-height: 1.6; /* Better readability */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about {
+        flex-direction: column; /* Stack items vertically */
+        text-align: center; /* Center text */
+        padding: 30px;
+    }
+
+    .about-content p {
+        max-width: 100%; /* Allow full width */
+        text-align: center;
+    }
 }
 
 /* AOS Animations */
