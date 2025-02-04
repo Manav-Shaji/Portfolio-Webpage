@@ -1,0 +1,398 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    background-color: #121212;
+    color: #E1E1E1;
+}
+
+/* Navbar Styles */
+nav {
+    padding: 1rem 0;
+    transition: background 0.3s ease-in-out;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #E1E1E1;
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.navbar-brand:hover {
+    transform: scale(1.1);
+    color: #4C9FFF;  /* Change to blue shade */
+    text-shadow: 0px 4px 10px rgba(76, 159, 255, 0.5); /* Subtle glow effect */
+}
+
+.navbar-nav .nav-link {
+    color: #E1E1E1;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #4C9FFF;
+}
+
+/* Home Section */
+#home {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #4C9FFF, #3A506B);
+    animation: fadeIn 1s ease-in-out;
+}
+
+#home h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #E1E1E1;
+    margin-bottom: 1rem;
+    animation: slideIn 1s ease-in-out;
+}
+
+#home p {
+    font-size: 1.25rem;
+    color: #B0B0B0;
+}
+
+
+/* About Section */
+.about {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px;
+    max-width: 1200px;
+    margin: auto;
+    gap: 50px;
+}
+
+.about-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.about-content h1 {
+    font-size: 50px;
+    line-height: 1.2;
+}
+
+.about-content p {
+    font-size: 18px;
+    margin-top: 15px;
+    max-width: 500px;
+}
+
+/* Buttons */
+.buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+    min-width: 150px;
+}
+
+.download-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.download-btn:hover {
+    background-color: #0056b3;
+}
+
+.contact-btn {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.contact-btn:hover {
+    background-color: white;
+    color: black;
+    transform: scale(1.05);
+}
+
+/* Profile Image */
+.profile-container {
+    flex: 0.5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-image {
+    width: 200px;
+    border-radius: 50%;
+    border: 4px solid white;
+}
+
+/* Image Styling */
+.about-image {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease-in-out;
+}
+
+.about-image:hover {
+    transform: scale(1.05) rotate(2deg);
+}
+
+/* Skills Section */
+#skills {
+    padding: 4rem 2rem;
+    background-color: #1A1A1A;
+    text-align: center;
+}
+
+#skills .fab {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out;
+}
+
+#skills .fab:hover {
+    background-color: #4C9FFF;
+    transform: scale(1.2);
+}
+
+/* Projects Section */
+.projects {
+    text-align: center;
+    padding: 60px 5%;
+    background: #111;
+}
+
+/* Project Container */
+.project-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .project-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .project-container {
+        grid-template-columns: 1fr;
+    }
+    .projects {
+        padding: 60px 20px; /* Added padding for mobile */
+    }
+}
+
+/* Project Card */
+.project-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: justify;
+    margin: 10px 5px;
+    transition: transform 0.3s ease-in-out;
+    backdrop-filter: blur(10px);
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Project Links */
+.project-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    gap: 15px;
+}
+
+.project-links a {
+    background-color: #0070f3;
+    color: #ECECEC;
+    padding: 0.5rem 1rem;
+    border-radius: 4px; /* Standard border radius */
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: all 0.3s ease; /* Smooth transition for the hover effect */
+}
+
+.project-card img {
+    width: 100%; /* Ensures the image spans the full width of the card */
+    height: 200px; /* Set a fixed height for consistency */
+    object-fit: cover; /* Prevents stretching and maintains aspect ratio */
+    border-radius: 10px; /* Adds rounded corners for aesthetics */
+    display: block; /* Removes extra space below the image */
+}
+
+
+/* Button Variant (more rounded) */
+.project-links a.btn {
+    background-color: #0070f3;
+    color: #ECECEC;
+    padding: 0.5rem 1rem;
+    border-radius: 50px; /* More rounded button */
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+
+/* Hover Effects for Both Button Types */
+.project-links a:hover, .project-links a.btn:hover {
+    background-color: #005bb5; /* Darken the background color on hover */
+    color: #ffffff; /* Change text color */
+    transform: translateY(-5px); /* Add a slight hover effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+}
+
+
+/* Contact Section */
+#contact {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #1A1A1A, #121212);
+    text-align: center;
+    color: #E1E1E1;
+}
+
+/* Form Styling */
+#contact form {
+    max-width: 500px;
+    margin: 0 auto;
+    background: #222222;
+    padding: 2rem;
+    border-radius: 1rem;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Form Hover Effect */
+#contact form:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 8px 20px rgba(76, 159, 255, 0.2);
+}
+
+/* Input Fields */
+#contact form input,
+#contact form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #B0B0B0;
+    background: #f8f6f6;
+    color: #0f0f0f;
+    border-radius: 0.5rem;
+    transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Input Focus Effects */
+#contact form input:focus,
+#contact form textarea:focus {
+    border-color: #4C9FFF;
+    box-shadow: 0px 0px 10px rgba(76, 159, 255, 0.3);
+    outline: none;
+}
+
+/* Textarea Auto-Expand */
+#contact form textarea {
+    resize: none;
+    overflow-y: hidden;
+    min-height: 100px;
+}
+
+/* Button Styling */
+#contact button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: #1762d4;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Button Hover */
+#contact button:hover {
+    background: #3A8CE8;
+    transform: translateY(-3px);
+}
+
+/* Scroll to Top Button */
+#scroll-to-top {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: #4C9FFF;
+    padding: 0.5rem 1rem;
+    color: #F5F5F5;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: none;
+    cursor: pointer;
+    font-size: 1.25rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#scroll-to-top:hover {
+    background-color: #00234c;
+    transform: translateY(-2px);
+}
+
+/* Footer */
+footer {
+    background-color: #1A1A1A;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+/* Remove underline & add hover effect */
+.footer-link {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #4C9FFF;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(50px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
