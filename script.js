@@ -1,20 +1,31 @@
 document.addEventListener("DOMContentLoaded", function () {
- // 🏠 Hamburger Menu Toggle
-const menuBtn = document.getElementById("menu-btn");
-const mobileMenu = document.getElementById("mobile-menu");
+// 🏠 Hamburger Menu Toggle
+document.addEventListener("DOMContentLoaded", function () {
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
 
-if (menuBtn && mobileMenu) {
-    menuBtn.addEventListener("click", function () {
+    if (!menuBtn || !mobileMenu) {
+        console.warn("Menu button or mobile menu not found.");
+        return;
+    }
+
+    // Toggle Mobile Menu
+    menuBtn.addEventListener("click", function (event) {
+        event.stopPropagation(); // Prevents triggering outside click close
+
         mobileMenu.classList.toggle("active");
+        const isOpen = mobileMenu.classList.contains("active");
 
-        // Ensure accessibility attributes are updated
-        if (mobileMenu.classList.contains("active")) {
-            mobileMenu.setAttribute("aria-expanded", "true");
-            mobileMenu.setAttribute("aria-hidden", "false");
-            menuBtn.setAttribute("aria-label", "Close menu");
-        } else {
+        // Update accessibility attributes
+        mobileMenu.setAttribute("aria-expanded", isOpen.toString());
+        menuBtn.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", function (event) {
+        if (!menuBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
+            mobileMenu.classList.remove("active");
             mobileMenu.setAttribute("aria-expanded", "false");
-            mobileMenu.setAttribute("aria-hidden", "true");
             menuBtn.setAttribute("aria-label", "Open menu");
         }
     });
@@ -24,11 +35,11 @@ if (menuBtn && mobileMenu) {
         if (window.innerWidth > 768) {
             mobileMenu.classList.remove("active");
             mobileMenu.setAttribute("aria-expanded", "false");
-            mobileMenu.setAttribute("aria-hidden", "true");
             menuBtn.setAttribute("aria-label", "Open menu");
         }
     });
-}
+});
+
 
 
     // Initialize AOS (Animate on Scroll) Library
