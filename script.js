@@ -25,37 +25,33 @@ document.addEventListener("DOMContentLoaded", function () {
     const navLinks = document.querySelectorAll(".nav-link");
 
     if (menuBtn && mobileMenu) {
+        const bsCollapse = new bootstrap.Collapse(mobileMenu, { toggle: false });
+
         // Toggle menu when clicking the navbar toggler
         menuBtn.addEventListener("click", () => {
-            mobileMenu.classList.toggle("show");
+            if (mobileMenu.classList.contains("show")) {
+                bsCollapse.hide();
+            } else {
+                bsCollapse.show();
+            }
         });
 
-        // Close menu when clicking a nav link (on mobile only)
+        // Close menu when clicking a nav link (only in mobile view)
         navLinks.forEach(link => {
             link.addEventListener("click", () => {
                 if (window.innerWidth <= 992) {
-                    mobileMenu.classList.remove("show");
+                    bsCollapse.hide();
                 }
             });
         });
 
-        // Close menu when clicking outside (but not reopen when clicking anywhere)
+        // Close menu when clicking outside (excluding navbar & menu)
         document.addEventListener("click", (e) => {
-            const isClickInsideMenu = mobileMenu.contains(e.target);
-            const isClickOnToggler = menuBtn.contains(e.target);
-
-            if (!isClickInsideMenu && !isClickOnToggler) {
-                mobileMenu.classList.remove("show");
+            if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                bsCollapse.hide();
             }
         });
-
-        // Prevent menu from opening when clicking inside the navbar itself
-        mobileMenu.addEventListener("click", (e) => {
-            e.stopPropagation(); // Stop the click from propagating to the document
-        });
     }
-});
-
     // Smooth Scrolling with Dynamic Speed
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener("click", function (e) {
