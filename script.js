@@ -9,36 +9,39 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
-    // Toggle Mobile Menu
+    // ✅ Toggle Menu Visibility
     menuBtn.addEventListener("click", function (event) {
-        event.stopPropagation(); // Prevents triggering outside click close
-
+        event.stopPropagation(); // Prevents immediate close when clicking the button
         mobileMenu.classList.toggle("active");
-        const isOpen = mobileMenu.classList.contains("active");
 
-        // Update accessibility attributes
-        mobileMenu.setAttribute("aria-expanded", isOpen.toString());
+        // Accessibility Attributes
+        const isOpen = mobileMenu.classList.contains("active");
         menuBtn.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+        mobileMenu.setAttribute("aria-expanded", isOpen.toString());
+        mobileMenu.setAttribute("aria-hidden", (!isOpen).toString());
     });
 
-    // Close menu when clicking outside
+    // ✅ Close Menu When Clicking Outside
     document.addEventListener("click", function (event) {
         if (!menuBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
             mobileMenu.classList.remove("active");
-            mobileMenu.setAttribute("aria-expanded", "false");
             menuBtn.setAttribute("aria-label", "Open menu");
+            mobileMenu.setAttribute("aria-expanded", "false");
+            mobileMenu.setAttribute("aria-hidden", "true");
         }
     });
 
-    // 🖥️ Fix: Reset menu on window resize
+    // ✅ Reset Menu on Window Resize (Fix Alignment Issue)
     window.addEventListener("resize", function () {
         if (window.innerWidth > 768) {
             mobileMenu.classList.remove("active");
-            mobileMenu.setAttribute("aria-expanded", "false");
             menuBtn.setAttribute("aria-label", "Open menu");
+            mobileMenu.setAttribute("aria-expanded", "false");
+            mobileMenu.setAttribute("aria-hidden", "true");
         }
     });
 });
+
 
 
 
