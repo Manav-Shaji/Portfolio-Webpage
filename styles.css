@@ -238,7 +238,7 @@ nav {
     gap: 20px;
 }
 
-/* General Button Styling */
+/* General Button Styles */
 .btn {
     display: inline-block;
     padding: 12px 24px;
@@ -251,26 +251,20 @@ nav {
     text-decoration: none;
 }
 
-/* Primary Button */
 .btn-primary {
     background: linear-gradient(90deg, #007bff, #4C9FFF);
     color: white;
 }
 
-.btn-primary:hover {
-    box-shadow: 0px 0px 15px rgba(76, 159, 255, 0.5);
-    transform: translateY(-3px);
-}
-
-/* Secondary Button */
 .btn-secondary {
     background: #555;
     color: white;
 }
 
-.btn-secondary:hover {
-    background: #777;
+.btn:hover {
     transform: translateY(-3px);
+    box-shadow: 0px 0px 15px rgba(76, 159, 255, 0.5);
+    border-bottom: 2p
 }
 
 /* Responsive Design */
@@ -631,16 +625,53 @@ footer {
     overflow: hidden; /* Prevents stretched elements */
 }
 
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
 
-.footer-link {
+/* Link Styles */
+.footer-links a {
+    color: #ffffff; /* White text */
     text-decoration: none;
-    color: white;
-    transition: color 0.3s ease;
+    font-size: 1rem;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s ease-in-out;
+    border: none; /* Ensure no border is added */
 }
 
-.footer-link:hover {
-    color: #4C9FFF;
+/* Hover effect */
+.footer-links a:hover {
+    color: #4da8ff; /* Light blue hover color */
 }
+
+/* Underline effect */
+.footer-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background: #4da8ff;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.footer-links a:hover::after {
+    transform: scaleX(1);
+}
+
+/* Completely Remove Focus Outline */
+.footer-links a:focus,
+.footer-links a:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
 
 @keyframes fadeInUp {
     0% { opacity: 0; transform: translateY(50px); }
