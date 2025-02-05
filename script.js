@@ -1,150 +1,151 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const navbarToggler = document.querySelector(".navbar-toggler");
-    const navbarMenu = document.querySelector("#navbarNav");
-
-    if (!navbarToggler || !navbarMenu) {
-        console.warn("Navbar toggler or menu not found.");
-        return;
-    }
-
-    // ✅ Toggle Navbar on Click
-    navbarToggler.addEventListener("click", function () {
-        navbarMenu.classList.toggle("show");
-    });
-
-    // ✅ Close Navbar When Clicking Outside or a Link
-    document.addEventListener("click", function (event) {
-        if (!navbarToggler.contains(event.target) && !navbarMenu.contains(event.target)) {
-            navbarMenu.classList.remove("show");
-        }
-    });
-
-    // ✅ Close Navbar When Clicking a Link (Optional)
-    document.querySelectorAll(".nav-link").forEach((link) => {
-        link.addEventListener("click", function () {
-            navbarMenu.classList.remove("show");
-        });
-    });
-});
-
-
-    // Initialize AOS (Animate on Scroll) Library
-    AOS.init({
-        duration: 1000, // Animation duration in ms
-        once: true, // Ensures animation runs only once when scrolled into view
-    });
-
-    // 🏃‍♂️ Smooth Scrolling for Internal Links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            const target = document.querySelector(this.getAttribute("href"));
-            if (target) {
-                e.preventDefault();
-                setTimeout(() => {
-                    target.scrollIntoView({
-                        behavior: "smooth"
-                    });
-                }, 100); // 100ms delay before scrolling
-            }
-        });
-    });
-
-    // 🎭 Typed.js (Animated Text Effect)
+    // Typed.js Initialization
     if (typeof Typed !== "undefined" && document.getElementById("typed-output")) {
         new Typed("#typed-output", {
             strings: ["Creative Developer", "Design Innovator", "Tech Enthusiast", "Web Wizard"],
             typeSpeed: 100,
             backSpeed: 50,
             loop: true,
-            onStart: function () {
-                document.getElementById("typed-output").style.color = "#4C9FFF"; // Change text color on start
-            },
-            onStringTyped: function () {
-                document.getElementById("typed-output").style.color = "#E1E1E1"; // Reset color after each string is typed
+            onStart: () => document.getElementById("typed-output").style.color = "#4C9FFF",
+            onStringTyped: () => document.getElementById("typed-output").style.color = "#E1E1E1"
+        });
+    }
+
+    // AOS Initialization
+    if (typeof AOS !== "undefined") {
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    }
+
+    // Mobile Menu Handling (Fixed Nested Event)
+    const menuBtn = document.querySelector(".navbar-toggler");
+    const mobileMenu = document.querySelector(".navbar-collapse");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    if (menuBtn && mobileMenu) {
+        // Toggle menu when clicking the navbar toggler
+        menuBtn.addEventListener("click", () => {
+            mobileMenu.classList.toggle("show");
+        });
+
+        // Close menu when clicking a nav link
+        navLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                if (window.innerWidth <= 992) {
+                    const bsCollapse = new bootstrap.Collapse(mobileMenu);
+                    bsCollapse.hide();
+                }
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener("click", (e) => {
+            if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                const bsCollapse = new bootstrap.Collapse(mobileMenu);
+                bsCollapse.hide();
             }
         });
     }
 
-    // ✉️ Contact Form Validation
+    // Smooth Scrolling with Dynamic Speed
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute("href"));
+            if (target) {
+                const distance = Math.abs(window.scrollY - target.offsetTop);
+                const duration = Math.min(1000, Math.max(300, distance / 2));
+
+                window.scrollTo({
+                    top: target.offsetTop,
+                    behavior: "smooth"
+                });
+            }
+        });
+    });
+
+    // Contact Form Handling
     const contactForm = document.getElementById("contact-form");
+    const formMessage = document.getElementById("form-message");
+    const submitButton = document.querySelector("#contact-form button[type='submit']");
+    const textarea = document.getElementById("message");
 
-    if (contactForm) {
-        contactForm.addEventListener("submit", function (event) {
-            event.preventDefault();
+    // Function to show messages with fade effect
+    function showFormMessage(text, color) {
+        if (formMessage) {
+            formMessage.textContent = text;
+            formMessage.style.color = color;
+            formMessage.style.opacity = "1";
 
-            let name = document.getElementById("name").value.trim();
-            let email = document.getElementById("email").value.trim();
-            let message = document.getElementById("message").value.trim();
-            let formMessage = document.getElementById("form-message");
-
-            // Validate email format
-            const emailRegex = /^\S+@\S+\.\S+$/;
-
-            if (!name || !email || !message) {
-                showMessage(formMessage, "Please fill in all fields.", "red");
-                highlightInvalidFields();
-            } else if (!emailRegex.test(email)) {
-                showMessage(formMessage, "Please enter a valid email address.", "red");
-                highlightInvalidFields();
-            } else {
-                showMessage(formMessage, "Your message has been sent!", "green");
-
-                // Delay form reset to show success message for 2 seconds
-                setTimeout(() => {
-                    contactForm.reset();
-                    document.getElementById("message").style.height = "auto"; // Reset textarea height
-                }, 2000);
-            }
-        });
-    }
-
-    // Function to display messages with animation
-    function showMessage(element, text, color) {
-        element.textContent = text;
-        element.style.color = color;
-        element.style.opacity = "0"; // Start invisible
-        element.style.transition = "opacity 0.3s ease-in-out";
-
-        setTimeout(() => {
-            element.style.opacity = "1"; // Fade in
-        }, 100);
-    }
-
-    // Function to highlight invalid fields
-    function highlightInvalidFields() {
-        if (!name) document.getElementById("name").style.borderColor = "red";
-        if (!email) document.getElementById("email").style.borderColor = "red";
-        if (!message) document.getElementById("message").style.borderColor = "red";
+            setTimeout(() => {
+                formMessage.style.opacity = "0";
+            }, 3000);
+        }
     }
 
     // Function to auto-expand textarea
     function autoExpand(element) {
-        element.style.height = "auto"; // Reset height
-        element.style.height = element.scrollHeight + "px"; // Adjust height
+        requestAnimationFrame(() => {
+            element.style.height = "auto"; // Reset height
+            element.style.height = element.scrollHeight + "px"; // Adjust height
+        });
     }
 
-    // 🔼 Scroll to Top Button
-    const scrollButton = document.getElementById("scroll-to-top");
-    if (scrollButton) {
-        window.addEventListener("scroll", function () {
-            // Show the button when scrolled more than 200px
-            if (window.scrollY > 200) {
-                scrollButton.classList.add("show");
-            } else {
-                scrollButton.classList.remove("show");
+    // Apply auto-expand to textarea
+    if (textarea) {
+        textarea.addEventListener("input", function () {
+            autoExpand(this);
+        });
+    }
+
+    if (contactForm) {
+        contactForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const message = textarea.value.trim();
+            const emailRegex = /^\S+@\S+\.\S+$/;
+
+            if (!name || !email || !message) {
+                showFormMessage("Please fill in all fields.", "red");
+                return;
             }
+
+            if (!emailRegex.test(email)) {
+                showFormMessage("Please enter a valid email address.", "red");
+                return;
+            }
+
+            // Disable submit button to prevent multiple submissions
+            submitButton.disabled = true;
+            submitButton.textContent = "Sending...";
+
+            setTimeout(() => {
+                showFormMessage("Message sent successfully!", "green");
+                contactForm.reset();
+                autoExpand(textarea); // Reset textarea height
+                submitButton.disabled = false;
+                submitButton.textContent = "Send Message";
+            }, 1500); // Simulating message processing time
+        });
+    }
+
+    // Scroll to Top Button with Fade Effect
+    const scrollButton = document.getElementById("scroll-to-top");
+
+    if (scrollButton) {
+        window.addEventListener("scroll", () => {
+            scrollButton.classList.toggle("show", window.scrollY > 200);
         });
 
-        scrollButton.addEventListener("click", function () {
+        scrollButton.addEventListener("click", () => {
             window.scrollTo({
                 top: 0,
                 behavior: "smooth"
             });
         });
-    }
-
-    // 🎨 Add transitions for mobile menu
-    if (mobileMenu) {
-        mobileMenu.style.transition = "transform 0.3s ease-in-out";
     }
 });
