@@ -47,6 +47,11 @@ nav {
     text-shadow: 0px 4px 10px rgba(76, 159, 255, 0.5);
 }
 
+.navbar-brand:focus,
+.navbar-nav .nav-link:focus {
+    outline: none;
+}
+
 /* Underline Animation for Brand */
 .navbar-brand::after {
     content: "";
