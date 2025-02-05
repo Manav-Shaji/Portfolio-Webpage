@@ -1,48 +1,31 @@
 document.addEventListener("DOMContentLoaded", function () {
-// 🏠 Hamburger Menu Toggle
-document.addEventListener("DOMContentLoaded", function () {
-    const menuBtn = document.getElementById("menu-btn");
-    const mobileMenu = document.getElementById("mobile-menu");
+    const navbarToggler = document.querySelector(".navbar-toggler");
+    const navbarMenu = document.querySelector("#navbarNav");
 
-    if (!menuBtn || !mobileMenu) {
-        console.warn("Menu button or mobile menu not found.");
+    if (!navbarToggler || !navbarMenu) {
+        console.warn("Navbar toggler or menu not found.");
         return;
     }
 
-    // ✅ Toggle Menu Visibility
-    menuBtn.addEventListener("click", function (event) {
-        event.stopPropagation(); // Prevents immediate close when clicking the button
-        mobileMenu.classList.toggle("active");
-
-        // Accessibility Attributes
-        const isOpen = mobileMenu.classList.contains("active");
-        menuBtn.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
-        mobileMenu.setAttribute("aria-expanded", isOpen.toString());
-        mobileMenu.setAttribute("aria-hidden", (!isOpen).toString());
+    // ✅ Toggle Navbar on Click
+    navbarToggler.addEventListener("click", function () {
+        navbarMenu.classList.toggle("show");
     });
 
-    // ✅ Close Menu When Clicking Outside
+    // ✅ Close Navbar When Clicking Outside or a Link
     document.addEventListener("click", function (event) {
-        if (!menuBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
-            mobileMenu.classList.remove("active");
-            menuBtn.setAttribute("aria-label", "Open menu");
-            mobileMenu.setAttribute("aria-expanded", "false");
-            mobileMenu.setAttribute("aria-hidden", "true");
+        if (!navbarToggler.contains(event.target) && !navbarMenu.contains(event.target)) {
+            navbarMenu.classList.remove("show");
         }
     });
 
-    // ✅ Reset Menu on Window Resize (Fix Alignment Issue)
-    window.addEventListener("resize", function () {
-        if (window.innerWidth > 768) {
-            mobileMenu.classList.remove("active");
-            menuBtn.setAttribute("aria-label", "Open menu");
-            mobileMenu.setAttribute("aria-expanded", "false");
-            mobileMenu.setAttribute("aria-hidden", "true");
-        }
+    // ✅ Close Navbar When Clicking a Link (Optional)
+    document.querySelectorAll(".nav-link").forEach((link) => {
+        link.addEventListener("click", function () {
+            navbarMenu.classList.remove("show");
+        });
     });
 });
-
-
 
 
     // Initialize AOS (Animate on Scroll) Library
