@@ -683,6 +683,7 @@ footer {
     to { transform: translateY(0); opacity: 1; }
 }
 
-a:focus, button:focus, input:focus, textarea:focus {
-    outline: 2px solid #4C9FFF;
+a:focus {
+    outline: none !important;
 }
+
